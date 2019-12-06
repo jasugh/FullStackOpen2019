@@ -7,8 +7,7 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
 
-const r = morgan.token("data", (req) => {
-
+morgan.token("data", (req) => {
     if(req.method === 'POST'){
         return JSON.stringify(req.body);
     }
