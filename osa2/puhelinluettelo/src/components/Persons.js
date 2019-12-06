@@ -1,15 +1,17 @@
 import React from 'react'
+import './Persons.css'
+import Person from './Person'
 
-const Persons = ({persons, searchName}) => {
+const Persons = ({persons, searchName, deletePerson}) => {
     const personsToShow = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()));
 
     const rows = () => personsToShow.map((person) =>
-        <ul key={person.name}>
-            {person.name}
-            {person.number}
-        </ul>
+        <Person
+            key={person.id}
+            person={person}
+            deletePerson={() => deletePerson(person)}
+        />
     );
-
     return (
         <div>
             {rows()}
@@ -18,3 +20,5 @@ const Persons = ({persons, searchName}) => {
 };
 
 export default Persons
+
+

@@ -1,13 +1,8 @@
 {
-  "persons":[
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
+  "persons": [
     {
       "name": "Ada Lovelace",
-      "number": "39-44-5323523",
+      "number": "39-45-53235238",
       "id": 2
     },
     {
@@ -21,9 +16,9 @@
       "id": 4
     },
     {
-      "name": "John Doe",
-      "number": "12-23-346423122",
-      "id": 4
+      "name": "Jorma Kaukonen",
+      "number": "0400 200 400",
+      "id": 5
     }
   ]
 }
