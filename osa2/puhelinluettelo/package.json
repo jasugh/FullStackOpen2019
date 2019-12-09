@@ -8,6 +8,9 @@
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
   },
+  "devDependencies": {
+    "eslint": "^6.7.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -29,5 +32,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

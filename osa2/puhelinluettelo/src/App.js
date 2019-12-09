@@ -40,15 +40,16 @@ const App = () => {
             number: newNumber
         };
 
-        const i = persons.map(p => p.name).indexOf(newName);
+        const p = persons.find(person => person.name === newName);
 
-        if (i > -1) {
+        if (p) {
             if (window.confirm(`${newName} is already added to phone book, replace the old number with a new one?`)) {
+                p.number = newNumber;
                 personService
-                    .update(persons[i].id, personObject)
+                    .update(p)
                     .then(data => {
                         setMessage(
-                            `Phone number of ${data.name} changed`
+                            `Person ${data.name} updated successfully`
                         );
                         setMessageClass('message');
                         setTimeout(() => {
@@ -60,7 +61,7 @@ const App = () => {
                     })
                     .catch(error => {
                         setMessage(
-                            `Information of ${newName} has already been removed from server`
+                            `Person ${newName} could not be updated`
                         );
                         setMessageClass('error');
                         setTimeout(() => {
@@ -81,9 +82,19 @@ const App = () => {
                 setTimeout(() => {
                     setMessage(null)
                 }, 5000);
+
                 setPersons(persons.concat(data));
                 setNewName('');
                 setNewNumber('')
+            })
+            .catch(error => {
+                setMessage(
+                    `${error.response.data}`
+                );
+                setMessageClass('error');
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000);
             })
     };
 
@@ -92,14 +103,24 @@ const App = () => {
             personService.remove(person.id)
                 .then(data => {
                     setMessage(
-                        `Deleted ${person.name}`
+                        `Person ${person.name} was deleted`
                     );
                     setMessageClass('message');
                     setTimeout(() => {
                         setMessage(null)
                     }, 5000);
                     setPersons(persons.filter(p => p.id !== person.id))
-                });
+                })
+                .catch(error => {
+                    setMessage(
+                        `${person.name} was already deleted`
+                    );
+                    setMessageClass('error');
+                    setTimeout(() => {
+                        setMessage(null)
+                    }, 5000);
+                    setPersons(persons.filter(p => p.id !== person.id));
+                })
         }
     };
 
