@@ -1,0 +1,35 @@
+GET http://localhost:3001/api/blogs
+Accept: application/json
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVrYXVzZXIiLCJpZCI6IjVkZjUxYTVkMTU1MDJjMzQ5MDA4OGRmMSIsImlhdCI6MTU3NjUyOTI3M30.zWOn5NRqkTWPsV1KGMPCUYLVjNDqKs7M82hcu3I-1Bc
+
+{
+  "title": "Hyviä juttuja lisää, ekauser",
+  "author": "Toinen",
+  "url": "urliosoite.com",
+  "likes": 0,
+  "id": "5df51a5d15502c3490088df1"
+}
+
+###
+
+PUT  http://localhost:3001/api/blogs/5df8c0cdf455ec49d0cae40a
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVrYXVzZXIiLCJpZCI6IjVkZjUxYTVkMTU1MDJjMzQ5MDA4OGRmMSIsImlhdCI6MTU3NjUyOTI3M30.zWOn5NRqkTWPsV1KGMPCUYLVjNDqKs7M82hcu3I-1Bc
+
+{
+  "title": "Hyvä juttu",
+  "author": "Toinen",
+  "url": "urliosoite.com",
+  "likes": 2
+}
+
+###
+
+DELETE http://localhost:3001/api/blogs/5df8c0cdf455ec49d0cae40a
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVrYXVzZXIiLCJpZCI6IjVkZjUxYTVkMTU1MDJjMzQ5MDA4OGRmMSIsImlhdCI6MTU3NjU4MjA4MX0.mBcp9TeliObCTPFk9--v5_LHOSHTW1JKXeLXSwhlyLU
+###
