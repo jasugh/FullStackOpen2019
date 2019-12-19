@@ -43,6 +43,5 @@ test('clicking the button calls event handler twice', async () => {
   fireEvent.click(button)
   fireEvent.click(button)
 
-
   expect(mockHandler.mock.calls.length).toBe(2)
 })

@@ -15,24 +15,35 @@ const Blog = ({blog, handleLike, handleDelete, user}) => {
     setLineHide(!lineHide)
   };
 
+  if (lineHide) {
+    return (
+      <div  style={ blogStyle }>
+        <div  className='lineHided' onClick={ toggleHide }>
+          { blog.title } by { blog.author }
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div style={ blogStyle }>
-      <div onClick={toggleHide}>
+      <div onClick={ toggleHide }>
         { blog.title } by { blog.author }
       </div>
-      <div hidden={lineHide}>
+      <div hidden={ lineHide }>
         <div>
           <div>
             { blog.url }
           </div>
           <div>
             { blog.likes }
-            <button onClick={() => handleLike(blog.id)}>like</button>
+            <button onClick={ () => handleLike(blog.id) }>like</button>
           </div>
           <div>
             Added by { blog.user.name }
-           </div>
-          <button hidden={user.username !== blog.user.username} onClick={() => handleDelete(blog.id)}>remove</button>
+          </div>
+          <button hidden={ user.username !== blog.user.username } onClick={ () => handleDelete(blog.id) }>remove
+          </button>
         </div>
       </div>
     </div>
