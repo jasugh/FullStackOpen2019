@@ -30,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -99,7 +99,6 @@ function App() {
   }
 
   const handleLike = async (id) => {
-
     try {
       const blogToLike = await blogs.find(blog => blog.id === id)
 
@@ -170,7 +169,7 @@ function App() {
       })
 
       window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
+        'loggedBlogAppUser', JSON.stringify(user)
       )
 
       blogService.setToken(user.token)
@@ -253,8 +252,6 @@ function App() {
           </ul>
         </div>
       }
-
-
     </div>
   );
 }

@@ -17,11 +17,9 @@ const Blog = ({blog, handleLike, handleDelete, user}) => {
 
   if (lineHide) {
     return (
-      <div  style={ blogStyle }>
-        <div  className='lineHided' onClick={ toggleHide }>
+        <div   style={ blogStyle } onClick={ toggleHide } className='lineHided'>
           { blog.title } by { blog.author }
         </div>
-      </div>
     )
   }
 

@@ -46,24 +46,17 @@ const blogs = [
         id: "5df51a5d15502c3490088df1"
       },
       id: "5dfa360548e1bb4bc8c8d675"
-    },
-    {
-      title: "title321654",
-      author: "author",
-      url: "urlasdfsadfsd",
-      likes: 0,
-      user: {
-        username: "tokauser",
-        name: "toinen user",
-        id: "5df5347755013932e07b65ec"
-      },
-      id: "5dfa36db48e1bb4bc8c8d676"
     }
   ]
-
 
 const getAll = () => {
   return Promise.resolve(blogs)
 }
 
-export default { getAll }
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
+
+export default { getAll, setToken }
