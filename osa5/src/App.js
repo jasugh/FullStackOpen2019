@@ -6,28 +6,19 @@ import BlogForm from "./components/BlogForm";
 import Notification from "./components/Notification";
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import { useField} from "./hooks/index"
 
 function App() {
-  const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('text')
   const [user, setUser] = useState(null)
-  const [newTitle, setTitle] = useState('')
-  const [newAuthor, setAuthor] = useState('')
-  const [newUrl, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
+  const [blogs, setBlogs] = useState([])
   const [message, setMessage] = useState(null);
   const [messageClass, setMessageClass] = useState(message)
   const [loginVisible, setLoginVisible] = useState(false)
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value)
-  };
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value)
-  };
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value)
-  };
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
@@ -67,9 +58,9 @@ function App() {
       blogFormRef.current.toggleVisibility()
 
       const newObject = {
-        title: newTitle,
-        author: newAuthor,
-        url: newUrl
+        title: title.value,
+        author: author.value,
+        url: url.value
       };
 
       const savedBlog = await blogService.create(newObject)
@@ -84,9 +75,9 @@ function App() {
       }, 5000)
 
       setBlogs(blogs.concat(savedBlog));
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      title.onReset()
+      author.onReset()
+      url.onReset()
     } catch (error) {
       setMessage(
         `Blog could not be added ${ error }`
@@ -164,9 +155,13 @@ function App() {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+
+      const user = {
+        username: username.value,
+        password: password.value
+      }
+
+      await loginService.login(user)
 
       window.localStorage.setItem(
         'loggedBlogAppUser', JSON.stringify(user)
@@ -174,8 +169,8 @@ function App() {
 
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      username.onReset()
+      password.onReset()
     } catch (exception) {
       setMessage(
         `wrong username or password`
@@ -198,11 +193,9 @@ function App() {
         </div>
         <div style={ showWhenVisible }>
           <LoginForm
+            handleLogin={ handleLogin }
             username={ username }
             password={ password }
-            handleUsernameChange={ ({target}) => setUsername(target.value) }
-            handlePasswordChange={ ({target}) => setPassword(target.value) }
-            handleSubmit={ handleLogin }
           />
           <button onClick={ () => setLoginVisible(false) }>cancel</button>
         </div>
@@ -219,12 +212,9 @@ function App() {
   const blogForm = () => (
     <BlogForm
       addBlog={ addBlog }
-      newTitle={ newTitle }
-      handleTitleChange={ handleTitleChange }
-      newAuthor={ newAuthor }
-      handleAuthorChange={ handleAuthorChange }
-      newUrl={ newUrl }
-      handleUrlChange={ handleUrlChange }
+      title={ title }
+      author={ author }
+      url={ url }
     />
   )
 
