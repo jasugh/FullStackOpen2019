@@ -25,7 +25,7 @@ const anecdoteReducer = (state = initialState, action) => {
     case 'NEW_ANECDOTE':
       return [...state, action.data]
     case 'VOTE':
-      const id = action.data.id
+      const id = action.data.anecdote.id
       const anecdoteToVote = state.find(n => n.id === id)
       const votedAnecdote = {
         ...anecdoteToVote,
@@ -40,11 +40,11 @@ const anecdoteReducer = (state = initialState, action) => {
   }
 }
 
-export const vote = (id) => {
+export const vote = (anecdote) => {
   return {
     type: 'VOTE',
     data: {
-      id: id
+      anecdote
     }
   }
 }
