@@ -1,5 +1,6 @@
 import React from 'react';
 import {newAnecdote} from "../reducers/anecdoteReducer";
+import {showNotification} from "../reducers/notificationReducer"
 
 function AnecdoteForm(props) {
 
@@ -10,6 +11,10 @@ function AnecdoteForm(props) {
     props.store.dispatch(
       newAnecdote(anecdote)
     )
+    props.store.dispatch(showNotification(`Anecdote ${anecdote} added`))
+    setTimeout(() => {
+      props.store.dispatch(showNotification(null))
+    }, 5000);
   }
 
   return (

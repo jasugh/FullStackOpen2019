@@ -1,14 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import {combineReducers, createStore} from 'redux'
 import App from './App'
 import anecdoteReducer from './reducers/anecdoteReducer'
+import notificationReducer from "./reducers/notificationReducer"
+import filterReducer from './reducers/filterReducer'
 
-const store = createStore(anecdoteReducer)
+const reducer = combineReducers({
+  anecdotes: anecdoteReducer,
+  notification: notificationReducer,
+  filter: filterReducer
+})
+
+const store = createStore(reducer)
+
+// store.dispatch(showNotification('combineReducers forms one reduces from many simple reducers'))
 
 const renderApp = () => {
   ReactDOM.render(
-    <App store={store} />,
+    <App store={ store }/>,
     document.getElementById('root')
   )
 }
