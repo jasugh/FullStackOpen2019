@@ -9,13 +9,25 @@ const notificationReducer = (state = initialState, action) => {
   }
 }
 
-export const showNotification = (notification) => {
-  return {
-    type: 'SHOW',
-    data: {
-      notification: notification
-    }
+export const showNotification = (notification, time) => {
+  return async dispatch => {
+    dispatch({
+      type: 'SHOW',
+      data: {
+        notification: notification
+      }
+    })
+
+    setTimeout(() => {
+      dispatch({
+        type: 'SHOW',
+        data: {
+          notification: null
+        }
+      })
+    }, time * 1000);
   }
+
 }
 
 export default notificationReducer

@@ -1,12 +1,11 @@
 import React from 'react'
+import {connect} from "react-redux";
+
 import {filter} from "../reducers/filterReducer";
 
 const Filter = (props) => {
-
   const handleAnecdoteSearch = (event) => {
-    props.store.dispatch(
-      filter(event.target.value)
-    )
+    props.filter(event.target.value)
   }
 
   const style = {
@@ -14,13 +13,26 @@ const Filter = (props) => {
   }
 
   return (
-    <div style={style}>
+    <div style={ style }>
       filter
       <input
-        onChange={handleAnecdoteSearch}
+        onChange={ handleAnecdoteSearch }
       />
     </div>
   )
 }
 
-export default Filter
+const mapStateToProps = (state) => {
+  return {
+    filter: state.filter
+  }
+}
+
+const mapDispatchToProps = {
+  filter
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Filter)

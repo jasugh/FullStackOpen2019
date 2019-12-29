@@ -1,20 +1,22 @@
 import React from 'react';
+import {connect} from "react-redux";
+
 import {newAnecdote} from "../reducers/anecdoteReducer";
 import {showNotification} from "../reducers/notificationReducer"
 
 function AnecdoteForm(props) {
 
-  const addAnecdote = (event)=> {
+  const addAnecdote = async (event) => {
     event.preventDefault()
-    const anecdote = event.target.anecdote.value
+
+    const anecdote = {
+      content: event.target.anecdote.value,
+      votes: 0
+    }
     event.target.anecdote.value = ''
-    props.store.dispatch(
-      newAnecdote(anecdote)
-    )
-    props.store.dispatch(showNotification(`Anecdote ${anecdote} added`))
-    setTimeout(() => {
-      props.store.dispatch(showNotification(null))
-    }, 5000);
+
+    props.newAnecdote(anecdote)
+    props.showNotification(`Anecdote ${ anecdote.content } added`,  5)
   }
 
   return (
@@ -30,4 +32,16 @@ function AnecdoteForm(props) {
   );
 }
 
-export default AnecdoteForm;
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    notification: state.notification
+  }
+}
+
+const mapDispatchToProps = {
+  newAnecdote,
+  showNotification
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(AnecdoteForm)
