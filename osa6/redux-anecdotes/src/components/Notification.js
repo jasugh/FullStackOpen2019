@@ -13,7 +13,6 @@ const Notification = (props) => {
     return null
   }
 
-
   return (
     <div style={style}>
       {props.notification}
