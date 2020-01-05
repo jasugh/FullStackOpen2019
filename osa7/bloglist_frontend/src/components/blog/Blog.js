@@ -13,18 +13,14 @@ const Blog = (props) => {
   const [delButton, setDelButton] = useState(false);
   let history = useHistory()
 
-  if (props.blog === null) {
-    return null
-  }
-
   const notify = (notification, type) => {
     props.setNotification({notification, type}, 5)
   }
 
-  const removeBlog = (blog) => {
+  const removeBlog = async (blog) => {
     const ok = window.confirm(`remove blog ${ blog.title } by ${ blog.author }`)
     if (ok) {
-      props.removeBlog(blog)
+      await props.removeBlog(blog)
       notify(`blog ${ blog.title } by ${ blog.author } removed!`)
       history.push('/')
     }
@@ -41,6 +37,10 @@ const Blog = (props) => {
       return true
     }
     return props.loginUser.username !== props.blog.user.username
+  }
+
+  if (props.blog === undefined) {
+    return null
   }
 
   return (

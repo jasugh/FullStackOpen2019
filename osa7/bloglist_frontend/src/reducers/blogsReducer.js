@@ -7,13 +7,11 @@ const blogsReducer = (state = [], action) => {
     case 'INIT_BLOGS':
       return action.data
     case 'REMOVE_BLOG':
-      return state
+      return state.filter(b => b.id !== action.data.id)
     case 'LIKE':
-      state = state.map(blog => blog.id === action.data.id ? action.data : blog)
-      return state
+      return state = state.map(blog => blog.id === action.data.id ? action.data : blog)
     case 'COMMENT':
-      state = state.map(blog => blog.id === action.data.id ? action.data : blog)
-      return state
+      return state = state.map(blog => blog.id === action.data.id ? action.data : blog)
     default:
       return state
   }
@@ -77,6 +75,7 @@ export const removeBlog = (blog) => {
 
     dispatch({
       type: 'REMOVE_BLOG',
+      data: blog
     })
   }
 }
