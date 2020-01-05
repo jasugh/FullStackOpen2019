@@ -1,16 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {Card, Feed, Button, Header} from 'semantic-ui-react'
 
 import BlogComments from './BlogComments'
-import {useField} from '../../hooks'
 import {setNotification} from '../../reducers/notificationReducer'
 import {removeBlog, likeBlog} from '../../reducers/blogsReducer'
 import {useHistory} from 'react-router-dom'
 
 const Blog = (props) => {
-  const [comment, commentReset] = useField('text')
-  const [delButton, setDelButton] = useState(false);
   let history = useHistory()
 
   const notify = (notification, type) => {
@@ -20,9 +17,8 @@ const Blog = (props) => {
   const removeBlog = async (blog) => {
     const ok = window.confirm(`remove blog ${ blog.title } by ${ blog.author }`)
     if (ok) {
-      await props.removeBlog(blog)
+      await props.removeBlog(blog, history)
       notify(`blog ${ blog.title } by ${ blog.author } removed!`)
-      history.push('/')
     }
   }
 
@@ -37,10 +33,6 @@ const Blog = (props) => {
       return true
     }
     return props.loginUser.username !== props.blog.user.username
-  }
-
-  if (props.blog === undefined) {
-    return null
   }
 
   return (
@@ -59,24 +51,7 @@ const Blog = (props) => {
         <Card.Content content={ `Likes ${ props.blog.likes }` }/>
         <Header as='h4'>Comments</Header>
 
-        {/**/ }
-        {/*<Form onSubmit={ commentBlog }>*/ }
-        {/*  <Form.Field>*/ }
-        {/*    <input { ...comment }/>*/ }
-        {/*  </Form.Field>*/ }
-        {/*  <Button*/ }
-        {/*    color='blue'*/ }
-        {/*    type='submit'*/ }
-        {/*  >*/ }
-        {/*    Comment*/ }
-        {/*  </Button>*/ }
-        {/*</Form>*/ }
-        {/*<br/>*/ }
-        {/**/ }
-
-        {/**/ }
         <BlogComments blog={ props.blog }/>
-        {/**/ }
 
         <br/>
         <Button

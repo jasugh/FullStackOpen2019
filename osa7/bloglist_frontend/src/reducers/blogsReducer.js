@@ -69,9 +69,11 @@ export const initializeBlogs = () => {
   }
 }
 
-export const removeBlog = (blog) => {
+export const removeBlog = (blog, history) => {
   return async dispatch => {
     await blogService.remove(blog)
+
+    history.push('/')
 
     dispatch({
       type: 'REMOVE_BLOG',
