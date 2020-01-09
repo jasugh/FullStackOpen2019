@@ -55,6 +55,7 @@ const Blog = (props) => {
 
         <br/>
         <Button
+          cy-name="like"
           onClick={ () => likeBlog(props.blog) }
           basic
           color='blue'
@@ -62,6 +63,7 @@ const Blog = (props) => {
           Like
         </Button>
         <Button
+          cy-name="delete_blog"
           disabled={ deleteButton() }
           onClick={ () => removeBlog(props.blog) }
           basic

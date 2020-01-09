@@ -36,6 +36,21 @@ const Blogs = (props) => {
   }
 
   const handleClick = id => {
+    const t = [{v:1}, {v:2}, {v:3}]
+
+    t.map(o => o.v).reduce((s, o) => s + o.v, 0)
+
+    console.log(t.map(o => o.v).reduce((s, o) => s + o, 0))
+    // console.log(t.map(o => {o.v}).reduce((s, o) => s + o, 0))
+    // console.log(t.map(o => o.v).sum)
+    // console.log(t.reduce((s, o) => { s + o.v }, 0))
+    console.log(t.reduce((s, o) => s + o.v, 0))
+    // console.log(t.map(o => o.v).reduce((s, o) => {s + o}, 0))
+    // console.log(t.reduce((s, o) => s + v, 0))
+
+
+
+
     history.push(`/blog/${ id }`)
   }
 
@@ -49,7 +64,10 @@ const Blogs = (props) => {
 
   return (
     <div>
-      <Togglable buttonLabel='Create new' ref={ newBlogRef }>
+      <Togglable
+        buttonLabel='Create new'
+        ref={ newBlogRef }
+      >
         <NewBlog createBlog={ createBlog }/>
       </Togglable>
 

@@ -39,11 +39,15 @@ let LoginForm = (props) => {
       <br/>
       <Form.Field>
         <label>Username</label>
-        <input { ...username }/>
+        <input
+          name="username"
+          { ...username }/>
       </Form.Field>
       <Form.Field>
         <label>Password</label>
-        <input { ...password }/>
+        <input
+          name="password"
+          { ...password }/>
       </Form.Field>
       <Button
         color='blue'

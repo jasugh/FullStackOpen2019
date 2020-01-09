@@ -28,9 +28,12 @@ const BlogComments = (props) => {
     <div>
       <Form onSubmit={ commentBlog }>
         <Form.Field>
-          <input { ...comment }/>
+          <input
+            name="comment"
+            { ...comment }/>
         </Form.Field>
         <Button
+          cy-name="comment"
           color='blue'
           type='submit'
         >

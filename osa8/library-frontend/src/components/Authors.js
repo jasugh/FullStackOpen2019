@@ -15,7 +15,7 @@ const Authors = (props) => {
   const authors = props.allAuthors.data.allAuthors
 
   const authorNames = () =>  {
-    return authors.map(author => <option name={author.name} value={ author.name }>{ author.name }</option>)
+    return authors.map(author => <option key={author.id} name={author.name} value={ author.name }>{ author.name }</option>)
   }
 
   const submit = async (e) => {
@@ -29,7 +29,6 @@ const Authors = (props) => {
   }
 
   const handleChange = (e) => {
-    console.log('handleChange ', e.target.value)
     setName(e.target.value)
   }
 
@@ -60,15 +59,15 @@ const Authors = (props) => {
       </div>
       <br/>
       <div>
-        <h2>Set birthyear</h2>
-        <form onSubmit={ submit }>
+
+        <form hidden={!props.token} onSubmit={ submit }>
+          <h2>Set birth year</h2>
           <select
             value={ name }
             onChange={ handleChange }
           >
             { authorNames() }
           </select>
-
           <div>
             born
             <input

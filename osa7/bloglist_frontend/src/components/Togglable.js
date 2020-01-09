@@ -21,6 +21,7 @@ const Togglable = React.forwardRef((props, ref) => {
     <div>
       <div style={hideWhenVisible}>
         <Button
+          cy-name="createBlog"
           color='blue'
           onClick={toggleVisibility}
         >

@@ -27,17 +27,24 @@ const NewBlog = (props) => {
         <br/>
         <Form.Field>
           <label>Title</label>
-          <input { ...title }/>
+          <input
+            name="title"
+            { ...title }/>
         </Form.Field>
         <Form.Field>
           <label>Author</label>
-          <input { ...author }/>
+          <input
+            name="author"
+            { ...author }/>
         </Form.Field>
         <Form.Field>
           <label>Url</label>
-          <input { ...url }/>
+          <input
+            name="url"
+            { ...url }/>
         </Form.Field>
         <Button
+          cy-name="create"
           color='blue'
           type='submit'
         >

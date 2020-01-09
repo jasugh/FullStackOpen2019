@@ -20,6 +20,7 @@ const Navbar = (props) => {
       <div>
         { props.loginUser.name } logged in
         <Button
+          cy-name="logout"
           onClick={ onLogout }
           basic
           color='red'

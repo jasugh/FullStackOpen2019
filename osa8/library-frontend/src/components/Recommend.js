@@ -1,8 +1,6 @@
-import React, {useState} from 'react'
+import React  from 'react'
 
-const Books = (props) => {
-  const [genre, setGenre] = useState(null)
-
+const Recommend = (props) => {
   if (!props.show) {
     return null
   }
@@ -11,24 +9,23 @@ const Books = (props) => {
     return <div>loading...</div>
   }
 
-  const selectGenre = (event) => {
-    setGenre(event.target.value)
+  if (props.user.loading) {
+    return <div>loading...</div>
   }
+  const user = props.user.data.me
 
   const bookRows = () => {
     let booksToShow = props.allBooks.data.allBooks
 
-    if (genre && genre !== 'all genres') {
       let ge = []
       for (let i = 0; i < booksToShow.length; i++) {
         for (let ii = 0; ii < booksToShow[i].genres.length; ii++) {
-          if (booksToShow[i].genres[ii] === genre) {
+          if (booksToShow[i].genres[ii] === user.favoriteGenre) {
             ge.push(booksToShow[i])
           }
         }
       }
       booksToShow = ge
-    }
 
     return (
       booksToShow.map(book =>
@@ -41,28 +38,15 @@ const Books = (props) => {
     )
   }
 
-  const getGenres = () => {
-    let g = ['all genres']
-    props.allBooks.data.allBooks.map(book => book.genres.map(genre => g.push(genre)))
-    const set = new Set(g)
-    const genresToShow = [...set]
-
-    return (
-      <div>
-        { genresToShow.map(g =>
-          <button key={ g } onClick={ selectGenre } value={ g }>{ g }</button>
-        ) }
-      </div>
-    )
-  }
 
   return (
     <div>
-      <h2>books</h2>
+      <h2>recommendations</h2>
+      <h3>books in your favorite genre: {user.favoriteGenre}</h3>
       <table>
         <tbody>
         <tr>
-          <th>in genre {genre}</th>
+          <th></th>
           <th>
             author
           </th>
@@ -74,9 +58,8 @@ const Books = (props) => {
         </tbody>
       </table>
       <br/>
-      { getGenres() }
     </div>
   )
 }
 
-export default Books
+export default Recommend
